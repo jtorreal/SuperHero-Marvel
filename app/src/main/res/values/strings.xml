@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">SuperHeroMarvel</string>
+
+    <!--Messages-->
+    <string name="error_get_data_service">There was a problem getting the data. Try it again later</string>
+    <string name="api_response_detail_character">The selected ID is not correct</string>
+    <string name="superhero_list_error">There are not superheroes</string>
+    <string name="superhero_detail_selected_error">SuperHero not found</string>
+
+</resources>
