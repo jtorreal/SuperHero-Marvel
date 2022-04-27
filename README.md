@@ -8,3 +8,4 @@ En este proyecto se ha utilizado:
 - Espresso
 - Mockito
 - Navigation Component
+- Unit Test con LiveData
