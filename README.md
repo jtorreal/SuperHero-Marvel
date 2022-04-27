@@ -1,6 +1,7 @@
 # SuperHero-Marvel
 En este proyecto se ha utilizado:
 - Inyección de dependencias: HILT
+- Flows
 - MVVM
 - Clean Arquitecture
 - ROOM
