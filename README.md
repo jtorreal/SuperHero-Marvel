@@ -1,11 +1,11 @@
 # SuperHero-Marvel
-En este proyecto se ha utilizado:
-- Inyección de dependencias: HILT
-- Flows
-- MVVM
+## Frameworks/Tools:
+- DI: HILT
+- Reactive Programming: Flows
+- Design Pattern: MVVM
 - Clean Arquitecture
-- ROOM
-- Espresso
-- Mockito
+- Database Library: ROOM
+- UI Testing : Espresso
+- Mocking Framework: Mockito
 - Navigation Component
-- Unit Test con LiveData
+- Unit Test with LiveData
