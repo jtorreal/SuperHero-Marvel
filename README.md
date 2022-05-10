@@ -1,4 +1,6 @@
 # SuperHero-Marvel
+It's an android application based on the Marvel Api
+
 ## Frameworks/Tools:
 - DI: HILT
 - Reactive Programming: Flows
