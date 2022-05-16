@@ -1,6 +1,8 @@
 # SuperHero-Marvel
 It's an android application based on the Marvel Api
 
+![image](https://user-images.githubusercontent.com/103564754/168588400-f25448d8-e63c-4cd2-8dca-74d92fa39baf.png)
+
 ## Frameworks/Tools:
 - DI: HILT
 - Reactive Programming: Flows
@@ -12,5 +14,5 @@ It's an android application based on the Marvel Api
 - Navigation Component
 - Unit Test with LiveData
 
-![image](https://user-images.githubusercontent.com/103564754/168588158-8563570a-8c11-4721-98fe-3406520714f4.png)
+
 
