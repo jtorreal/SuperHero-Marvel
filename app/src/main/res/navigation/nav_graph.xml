@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.jtorreal.superheromarvel.ui.detail.SuperHeroDetailFragment"
-        android:label="Character Detail"
+        android:label="SuperHero Detail"
         tools:layout="@layout/fragment_superhero_detail">
 
     </fragment>
