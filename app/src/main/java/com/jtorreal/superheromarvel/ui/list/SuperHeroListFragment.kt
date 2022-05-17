@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
@@ -12,12 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.jtorreal.superheromarvel.R
 import com.jtorreal.superheromarvel.databinding.FragmentSuperheroListBinding
 import com.jtorreal.superheromarvel.domain.model.SuperHeroDomain
+import com.jtorreal.superheromarvel.ui.SharedViewModel
 import com.jtorreal.superheromarvel.ui.UiResult
 import com.jtorreal.superheromarvel.ui.common.showOrHidden
 import com.jtorreal.superheromarvel.ui.common.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -29,6 +32,9 @@ class SuperHeroListFragment : Fragment(), CoroutineScope {
     companion object {
         const val ID_CHARACTER_SELECTED = "SELECTED_CHARACTER"
     }
+
+
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     private lateinit var job: Job
 
@@ -62,10 +68,11 @@ class SuperHeroListFragment : Fragment(), CoroutineScope {
 
         adapterSuperHeroAdapterList = SuperHeroAdapterList(superHeroList) {
 
-            val bundle = Bundle()
-            bundle.putString(ID_CHARACTER_SELECTED, it.id.toString())
+            //Save ID value in viewmodel state
+            sharedViewModel.saveId(it.id)
+
             binding.root.findNavController()
-                .navigate(R.id.action_characterListFragment_to_detailFragment, bundle)
+                .navigate(R.id.action_characterListFragment_to_detailFragment)
 
         }
 

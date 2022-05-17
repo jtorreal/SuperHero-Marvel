@@ -5,11 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.josetorres.marvel.ui.detail.SuperHeroDetailViewModel
 import com.jtorreal.superheromarvel.R
 import com.jtorreal.superheromarvel.databinding.FragmentSuperheroDetailBinding
+import com.jtorreal.superheromarvel.ui.SharedViewModel
 import com.jtorreal.superheromarvel.ui.UiResult
 import com.jtorreal.superheromarvel.ui.common.loadUrl
 import com.jtorreal.superheromarvel.ui.common.showOrHidden
@@ -23,6 +25,8 @@ import kotlin.coroutines.CoroutineContext
 @AndroidEntryPoint
 class SuperHeroDetailFragment : Fragment(), CoroutineScope {
 
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+
     private lateinit var job: Job
 
     override val coroutineContext: CoroutineContext
@@ -34,16 +38,6 @@ class SuperHeroDetailFragment : Fragment(), CoroutineScope {
 
     private val binding get() = _binding!!
 
-    private var idSelectedCharacter: String? = ""
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        idSelectedCharacter =
-            requireArguments().getString(SuperHeroListFragment.ID_CHARACTER_SELECTED)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,14 +45,7 @@ class SuperHeroDetailFragment : Fragment(), CoroutineScope {
 
         _binding = FragmentSuperheroDetailBinding.inflate(inflater, container, false)
 
-        idSelectedCharacter?.let {
-
-            superHeroDetailViewModel.loadCharacterDetail(idSelectedCharacter)
-
-
-        } ?: run {
-            requireContext().toast(requireContext().resources.getString(R.string.superhero_detail_selected_error))
-        }
+        superHeroDetailViewModel.loadCharacterDetail(sharedViewModel.id.value.toString())
 
         return binding.root
 
