@@ -1,15 +1,15 @@
 package com.jtorreal.superheromarvel.ui.list
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.jtorreal.superheromarvel.MainActivity
 import com.jtorreal.superheromarvel.R
 import com.jtorreal.superheromarvel.databinding.FragmentSuperheroListBinding
 import com.jtorreal.superheromarvel.domain.model.SuperHeroDomain
@@ -20,19 +20,14 @@ import com.jtorreal.superheromarvel.ui.common.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
 import kotlin.coroutines.CoroutineContext
+
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 @AndroidEntryPoint
 class SuperHeroListFragment : Fragment(), CoroutineScope {
-
-    companion object {
-        const val ID_CHARACTER_SELECTED = "SELECTED_CHARACTER"
-    }
-
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
@@ -80,11 +75,39 @@ class SuperHeroListFragment : Fragment(), CoroutineScope {
 
         binding.rvMain.layoutManager = LinearLayoutManager(activity)
 
+
+
         lifecycleScope.launchWhenStarted {
             superHeroListViewModel.progressVisible.collect {
                 binding.pbMainScreen.showOrHidden(it)
             }
         }
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+
+        if (menu.hasVisibleItems()) {
+
+            val menuItem = menu.findItem(R.id.action_search)
+            val search = menuItem.actionView as SearchView
+
+            search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+                override fun onQueryTextSubmit(p0: String?): Boolean {
+                    return false
+                }
+
+                override fun onQueryTextChange(text: String?): Boolean {
+                    adapterSuperHeroAdapterList.applyFilter().filter(text)
+                    return false;
+                }
+
+            })
+        }
+
+        return super.onCreateOptionsMenu(menu, inflater)
+
 
     }
 
@@ -97,7 +120,6 @@ class SuperHeroListFragment : Fragment(), CoroutineScope {
         super.onStart()
 
         job = SupervisorJob()
-
 
         launch {
 
@@ -116,6 +138,12 @@ class SuperHeroListFragment : Fragment(), CoroutineScope {
                             requireActivity().toast(it ?: "Ha habido un error")
                         }
                     }
+
+                    val toolbar =
+                        (activity as MainActivity?)!!.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar_main)
+                    toolbar?.showOrHidden(true)
+
+                    setHasOptionsMenu(true)
                 }
             }
         }
