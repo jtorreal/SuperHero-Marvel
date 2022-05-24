@@ -87,24 +87,22 @@ class SuperHeroListFragment : Fragment(), CoroutineScope {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 
-        if (menu.hasVisibleItems()) {
+        val menuItem = menu.findItem(R.id.action_search)
+        val search = menuItem.actionView as SearchView
 
-            val menuItem = menu.findItem(R.id.action_search)
-            val search = menuItem.actionView as SearchView
+        search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
-            search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return false
+            }
 
-                override fun onQueryTextSubmit(p0: String?): Boolean {
-                    return false
-                }
+            override fun onQueryTextChange(text: String?): Boolean {
+                adapterSuperHeroAdapterList.applyFilter().filter(text)
+                return false;
+            }
 
-                override fun onQueryTextChange(text: String?): Boolean {
-                    adapterSuperHeroAdapterList.applyFilter().filter(text)
-                    return false;
-                }
+        })
 
-            })
-        }
 
         return super.onCreateOptionsMenu(menu, inflater)
 
@@ -140,7 +138,9 @@ class SuperHeroListFragment : Fragment(), CoroutineScope {
                     }
 
                     val toolbar =
-                        (activity as MainActivity?)!!.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar_main)
+                        (activity as MainActivity?)!!.findViewById<androidx.appcompat.widget.Toolbar>(
+                            R.id.toolbar_main
+                        )
                     toolbar?.showOrHidden(true)
 
                     setHasOptionsMenu(true)

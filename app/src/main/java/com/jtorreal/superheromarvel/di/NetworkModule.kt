@@ -1,5 +1,6 @@
 package com.jtorreal.superheromarvel.di
 
+import com.jtorreal.superheromarvel.BuildConfig
 import com.jtorreal.superheromarvel.data.network.SuperHeroApiClient
 import dagger.Module
 import dagger.Provides
@@ -22,8 +23,8 @@ object NetworkModule {
 
     val BASE_URL = "https://gateway.marvel.com/"
     val TS = "1000"
-    val PUBLIC_KEY = "1e280d0ca9f8a5257cd14ecd08c40bd8"
-    val HASH = "4f1829f75efbb01a8ea068f0d419a653"//it is generated outside the app for security
+    val PUBLIC_KEY = BuildConfig.PUBLIC_KEY
+    val HASH = BuildConfig.HASH//it is generated outside the app for security
 
 
     @Singleton

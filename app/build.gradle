@@ -19,6 +19,12 @@ android {
     }
 
     buildTypes {
+
+        debug {
+            buildConfigField "String", "PUBLIC_KEY", "\"1e280d0ca9f8a5257cd14ecd08c40bd8\""
+            buildConfigField "String", "HASH", "\"4f1829f75efbb01a8ea068f0d419a653\""
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

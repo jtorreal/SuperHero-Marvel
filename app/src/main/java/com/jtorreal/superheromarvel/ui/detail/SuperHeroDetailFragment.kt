@@ -1,10 +1,8 @@
 package com.jtorreal.superheromarvel.ui.detail
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -16,7 +14,6 @@ import com.jtorreal.superheromarvel.ui.UiResult
 import com.jtorreal.superheromarvel.ui.common.loadUrl
 import com.jtorreal.superheromarvel.ui.common.showOrHidden
 import com.jtorreal.superheromarvel.ui.common.toast
-import com.jtorreal.superheromarvel.ui.list.SuperHeroListFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
@@ -37,6 +34,13 @@ class SuperHeroDetailFragment : Fragment(), CoroutineScope {
     private val superHeroDetailViewModel by viewModels<SuperHeroDetailViewModel>()
 
     private val binding get() = _binding!!
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setHasOptionsMenu(true)
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -90,6 +94,13 @@ class SuperHeroDetailFragment : Fragment(), CoroutineScope {
             }
         }
 
+    }
+
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        val item = menu.findItem(R.id.action_search)
+        item.isVisible = false
+        super.onPrepareOptionsMenu(menu)
     }
 
     override fun onStop() {
