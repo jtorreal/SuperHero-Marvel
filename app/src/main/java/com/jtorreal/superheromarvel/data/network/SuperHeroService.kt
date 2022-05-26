@@ -44,16 +44,12 @@ class SuperHeroService() {
 
         suspend fun getSuperHeroList(apiClient: SuperHeroApiClient): Result<List<SuperHeroServer>> {
 
-            val response = apiClient.getSuperHeroList()
-
-            return getResultService(response)
+            return getResultService(apiClient.getSuperHeroList())
         }
 
         suspend fun getSuperHero(apiClient: SuperHeroApiClient, superHeroId: String): Result<List<SuperHeroServer>> {
 
-            val response = apiClient.getSuperHero(superHeroId)
-
-            return getResultService(response)
+            return getResultService(apiClient.getSuperHero(superHeroId))
         }
 
         private fun getResultService(response: Response<SuperHeroResponse>): Result<List<SuperHeroServer>> {

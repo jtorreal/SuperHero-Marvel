@@ -49,8 +49,6 @@ class SuperHeroListViewModel @Inject constructor(
                         )
                     }
                 }
-
-
             }
         }
     }

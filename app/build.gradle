@@ -68,7 +68,7 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test:rules:1.1.0'
     implementation 'androidx.test.espresso:espresso-contrib:3.4.0'
-
+    
     //RETROFIT
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
 
@@ -93,12 +93,5 @@ dependencies {
     //GLIDE
     implementation "com.github.bumptech.glide:glide:$glide_version"
     annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
-
-    //ESPRESSO
-
-
-
-
-
 
 }
